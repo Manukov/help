@@ -1,5 +1,5 @@
 ## Content
 
-* [Regex](index/regex.md))
+* [Regex](index/regex.md)
 * [Регулярные выражения / Regex](index/regex.md)
 

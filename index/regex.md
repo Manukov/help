@@ -1,10 +1,15 @@
 ## Content
 
 * .
+* [Escaping](#escaping)
+* [Range Of Characters](#range-of-characters)
 * [Regex](#regex)
 * [Special Characters](#special-characters)
+* [Диапазон символов / Range Of Characters](#range-of-characters)
 * [Регулярные выражения / Regex](#regex)
 * [Специальные символы / Special Characters](#special-characters)
+* [Управляющие символы / Special Characters](#special-characters)
+* [Экранирование символов / Escaping](#escaping)
 
 
 ### .
@@ -17,12 +22,20 @@
 ### \
 \ - это символ позволяющий экранировать "специальные символы". Обратный слэш ставиться перед экранируемым символом
 
-
 ### []
 [] - это специальный символ обозначающий "диапазон допустимых значений"
 ``` regexp
 А[нл][нл]а          Результат: Анна, Алла, и даже нежелательный вариант Анла
 ```
+
+### Escaping
+Escaping (Экранирование символов) — замена в тексте управляющих (служебных) символов на соответствующие им последовательности символов
+
+[content](#content) [index](/index.md)
+
+### Range Of Characters
+Range Of Characters (Диапазон символов) - ....
+
 
 ### Regex
 Regex (Регулярные выражения) — это механизм для поиска и замены текста в строке, в файле, в нескольких файлах. Регулярные выражения используются:
@@ -35,7 +48,7 @@ Regex (Регулярные выражения) — это механизм дл
 [content](#content) [index](/index.md) 
 
 ### Special Characters
-Special Characters (Специальные символы) - ...
+Special Characters (Специальные символы, управляющие символы) - это символы имеют особое/специальное значение в регулярных выражениях. Это символы:
 * \
 * ^
 * $
@@ -43,4 +56,9 @@ Special Characters (Специальные символы) - ...
 * |
 * ?
 * \*
+* \+
+* ()
+* []
+* {}
+
 [content](#content) [index](/index.md) 

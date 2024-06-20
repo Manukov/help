@@ -1,6 +1,6 @@
 ## Content
 
-* [Regex](#regex))
+* [Regex](#regex)
 * [Регулярные выражения / Regex](#regex)
 
 ### Regex

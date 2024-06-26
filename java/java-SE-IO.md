@@ -34,8 +34,10 @@ Absolute Path (Абсолютный путь) -
 
 ### Buffered Stream
 Buffered Stream (Буферизованный поток) - это потоки, которые к стандартным операциям ввода-вывода, добавляют [буфер в памяти](#buffer) с помощью которого, повышается производительность при чтении и записи. К буферизованным потокам относятся:
-* [BufferedInputStream](#bufferedinputstream-class) 
-* [BufferedOutputStream](#bufferedoutputstream-class)
+* [BufferedInputStream](#bufferedinputstream-class) - буферизованный входной поток байтов
+* [BufferedReader](#bufferedreader-class) - буферизованный входной поток символов
+* [BufferedOutputStream](#bufferedoutputstream-class) - буферизованный выходной поток байтов
+* [BufferedWriter](#bufferedwriter-class) - буферизованный выходной поток символов
 
 ### BufferedInputStream-class
 BufferedInputStream (java.io) - это [буферизованный поток](#buffered-stream) ввода, который накапливает вводимые данные в специальном буфере без постоянного обращения к устройству ввода. Кроме буфера класс не добавляет дополнительной функциональности.
@@ -47,6 +49,9 @@ BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputS
 ```
 </details>
 
+### BufferedReader-class
+BufferedReader (java.io) - это [буферизованный поток](#buffered-stream) ввода
+
 ### BufferedOutputStream-class
 BufferedOutputStream (java.io) - это [буферизованный поток](#buffered-stream) вывода, который накапливает выводимые данные в специальном буфере без постоянного обращения к устройству вывода, и когда буфер будет заполнен тогда производиться запись. Кроме буфера класс не добавляет дополнительной функциональности.
 <details> <summary>Конструкторы</summary>
@@ -57,7 +62,8 @@ BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOut
 ```
 </details>
 
-
+### BufferedWriter-class
+BufferedWriter (java.io)- это [буферизованный поток](#buffered-stream) вывода...
 
 ### ByteArrayInputStream-class
 ByteArrayInputStream - это имплементация [InputStream](#inputstream-class) для работы с массивом байтов в памяти, для чтения данных из массива байтов.

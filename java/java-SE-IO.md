@@ -38,10 +38,18 @@ Buffered Stream (Буферизованный поток) - это потоки,
 * [BufferedOutputStream](#bufferedoutputstream-class)
 
 ### BufferedInputStream-class
-BufferedInputStream (java.io) - это входящий [буферизованный поток](#buffered-stream)
+BufferedInputStream (java.io) - это input/входящий [буферизованный поток](#buffered-stream) который при создании принимает параметром [InputStrem](#inputstream-class)
+
+<details> <summary>Конструкторы</summary>
+
 ``` java
-BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\data\\input-file.txt"));
+BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"));         
+BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"), 1024);
 ```
+
+</details>
+
+
 
 ### BufferedOutputStream-class
 

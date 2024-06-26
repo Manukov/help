@@ -155,6 +155,9 @@ RandomAccessFile file = new RandomAccessFile("c:\\data\\file.txt", "rw");       
 </details>
 <details> <summary>Методы</summary>
 
+* getFilePointer()
+* getFilePointer2()
+
 ``` java
 /**
 * long getFilePointer() - возвращает "текущую позицию" на котрой находиться указатель;

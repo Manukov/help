@@ -22,6 +22,9 @@
 * [Файл/File](#file)
 
 
+## I/O
+
+
 ### Absolute Path
 Absolute Path (Абсолютный путь) - 
 
@@ -30,9 +33,15 @@ Absolute Path (Абсолютный путь) -
 ### Buffer
 
 ### Buffered Stream
-Buffered Stream (Буферизованный поток) - это потоки, которые к стандартным операциям ввода-вывода, добавляют [буфер в памяти](#buffer) с помощью которого, повышается производительность при чтении и записи
+Buffered Stream (Буферизованный поток) - это потоки, которые к стандартным операциям ввода-вывода, добавляют [буфер в памяти](#buffer) с помощью которого, повышается производительность при чтении и записи. К буферизованным потокам относятся:
+* [BufferedInputStream](#bufferedinputstream-class) 
+* [BufferedOutputStream](#bufferedoutputstream-class)
 
 ### BufferedInputStream-class
+BufferedInputStream (java.io) - это входящий [буферизованный поток](#buffered-stream)
+``` java
+BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\data\\input-file.txt"));
+```
 
 ### BufferedOutputStream-class
 
@@ -77,8 +86,15 @@ Input (входной поток) - ввод данных из внешнего 
 
 ### InputStream-class
 InputStream (поток ввода) - это абстрактный класс, который описывает [входной поток](#input) или поток байтов из внешнего источника в приложение. Основной метод read(). Имеет реализации:
+* BufferedInputStream
 * ByteArrayInputStream - входной поток читающий из массив байтов в памяти;
+* DataInputStream
 * FileInputStream - входной поток читающий из файла;
+* FilterInputStream
+* ObjectInputStream
+* PipedInputStream
+* PushbackInputStream
+* SequenceInputStream
 
 ### Output
 Output (выходной поток) - вывод данных из приложения во внешний источник. Если приложению нужно отправить данные в [пункт назначения](#destination) то используются:
@@ -87,8 +103,14 @@ Output (выходной поток) - вывод данных из прилож
 
 ### OutputStream-class
 OutputStream (поток вывода) - это абстрактный класс, который описывает [выходной поток](#output) или поток байтов из приложения во внешний источник. Основной метод write(). Имеет реализации:
+* BufferedOutputStream
 * ByteArrayOutputStream - выходной поток записывающий в массив байтов в памяти;
+* DataOutputStream
 * FileOutputStream - выходной поток записывающий в файл;
+* FilterOutputStream
+* ObjectOutputStream
+* PipedOutputStream
+* PrintStream
 
 ### Reader-class
 Reader - это поток символов из внешнего источника в приложение.

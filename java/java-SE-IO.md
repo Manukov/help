@@ -39,20 +39,11 @@ Buffered Stream (Буферизованный поток) - это потоки,
 
 ### BufferedInputStream-class
 BufferedInputStream (java.io) - это input/входящий [буферизованный поток](#buffered-stream) который накапливает вводимые данные в специальном буфере без постоянного обращения к устройству ввода.
-
-который при создании принимает параметром [InputStrem](#inputstream-class)
-
 <details> <summary>Конструкторы</summary>
-Класс BufferedInputStream определяет два конструктора:
-BufferedInputStream(InputStream inputStream)
-BufferedInputStream(InputStream inputStream, int bufSize)
-где, 
-    InputStream inputStream - это поток ввода, с которого данные будут считываться в буфер
-    int bufSize - размер буфера в байтах
 
 ``` java
-BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"));         
-BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"), 1024);
+BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"));         // (1) поток ввода, с которого данные будут считываться в буфер       
+BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("c:\\file.txt"), 1024);   // (1) поток ввода, с которого данные будут считываться в буфер, (2) размер буфера в байтах 
 ```
 </details>
 

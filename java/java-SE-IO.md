@@ -23,7 +23,7 @@
 * [Файл/File](#file)
 
 
-## Java I/O API
+### Java I/O API
 
 
 ### Absolute Path
@@ -92,10 +92,10 @@ File (Файл) - .... Файл описывается типом [java.io.File]
 File - это объектно-ориентированное представление [файла](#file) или папки на жестком диске.
 
 ### FileInputStream-class
-FileInputStream - это имплементация [InputStream](#inputstream-class) для работы с файлами, для чтения данных из файла.
+FileInputStream - это имплементация [InputStream](#inputstream-class) представляющая "считываемый файл" в виде потока, из которого возможно считывать данные только последовательно, от начала до конца. Для произвольного чтения из файла используется [RandomAccessFile](#randomaccessfile-class). 
 
 ### FileOutputStream-class
-FileOutputStream - это имплементация [OutputStream](#outputstream-class) для работы с файлами, для записи данных в файл.
+FileOutputStream - это имплементация [OutputStream](#outputstream-class) представляющая "записываемый файл" в виде потока, в который возможно записывать данные только последовательно, от начала точки записи до конца файла. Для произвольной записи в любую часть файла используется [RandomAccessFile](#randomaccessfile-class).
 
 ### FilterInputStream-class
 FilterInputStream (java.io) - обертка над [InputStream](#inputstream-class) которая принимает аргументов конструктора объект [InputStream](#inputstream-class) и сохраняет его в volatile-переменной "in". Собственной функциональности класс не добавляет и существует только как промежуточный клас для того чтобы от него наследовались другие классы, такие как:
@@ -163,6 +163,7 @@ RandomAccessFile file = new RandomAccessFile("c:\\data\\file.txt", "rw");
 ``` java
 RandomAccessFile file = new RandomAccessFile("c:\\data\\file.txt", "rw"); 
 
+//считывание массива байтов из середины файла
 byte[] arr = new byte[1024];                    //массив байтов в который считываем байты из файла
 int offset = 1;
 int lenght = 1024;

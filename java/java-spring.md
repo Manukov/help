@@ -29,10 +29,19 @@ public static void main (String[] args) {
     MessageRender mr = ctx.getBean("render", MessageRender.class);                          //извлекаем бин по имени и типу
     mr.render();
 }
-  
 ```
 
 ### IoC
 IoC (Инверсия управления) - ....  Понятие IoC может быть разложена на 2 подтипа:
 * [Dependency Injection](#dependency-injection)
 * [Dependency Lookup](#dependency-lookup)
+
+
+### @ComponentScan-annotation
+@ComponentScan (org.springframework.context.annotation) - аннотация которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска компонентов/бинов
+
+``` java
+class 
+```
+
+Зависимость: spring-context

@@ -4,21 +4,28 @@
 * [org.aspect](#orgaspectj)
 * [Сквозная функциональность / Cross-Cutting Concern](/index.md#cross-cutting-concern)
 
+* [@EnableAspectJAutoProxy](/java-spring.md#enableaspectjautoproxy-annotation)
 
 ### AspectJ
-AspectJ - это [аспектно-ориентированный](/index.md#aop) фреймворк для языка Java
+AspectJ - это [аспектно-ориентированный](/index/AOP.md#aop) расширение для языка Java (фреймворк). 
+
+Преимущества:
+* В отличие от [Spring AOP](../java-spring/java-spring-AOP.md) предоставляет всю функциональность.
+
+Недостатки:
+* Более сложен в использовании чем [Spring AOP](../java-spring/java-spring-AOP.md)
+
+Этот фреймворк стал де-факто стандартов АОП в Java и предоставляет
+всю функциональность АОП, в отличие от Spring AOP который предоставляет только самую распространенную и необходимую функциональность.
 
 
 ### Advice
-Advice — средство оформления кода, которое должно быть вызвано из точки соединения. Совет может быть выполнен до, после или вместо точки соединения.
+Advice - это метод в аспекте. В зависимости от типа [advice](/index/AOP.md#advice) этот метод может быть аннотирован:
+* [@Before](#before-annotation)
 
+ [content](#content) [advice](/index/AOP.md#advice)
 
 ### Aop Proxy
-
-
-### Aspect
-Aspect — модуль или класс, реализующий сквозную функциональность. Аспект изменяет поведение остального кода, 
-применяя совет в точках соединения, определённых некоторым срезом.
 
 ### aspectjrt
 aspectjrt (AspectJ Runtime) - 
@@ -32,7 +39,13 @@ aspectjrt (AspectJ Runtime) -
 ```
 
 ### aspectjweaver
-
+```xml
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>${aspect.version}</version>
+</dependency>
+```
 
 ### introduction
 — изменение структуры класса и/или изменение иерархии наследования для добавления функциональности аспекта в инородный код. Обычно реализуется с помощью некоторого метаобъектного протокола (англ. metaobject protocol, MOP).
@@ -47,3 +60,32 @@ aspectjrt (AspectJ Runtime) -
 org.aspectj - это groupId зависимостей AspectJ. Библиотеки AspectJ
 * [aspectjrt](#aspectjrt) 
 * [aspectjweaver](#aspectjweaver)
+
+
+### @Aspect-annotation
+@Aspect (org.aspectj.lang.annotation) - аннотация применяется к классу который является [Аспектом](/index/AOP.md#aspect).
+```java
+//Пример Аспекта
+@Component
+@Aspect     //Указываем что этот класс является аспектом
+public class Aspect {
+    //advice A ...
+    //advice B ...
+}
+```
+
+### @Before-annotation
+@Before (org.aspectj.lang.annotation) - это аннотация которой аннотируется advice-метод типа Before (должен отработать до вызова advice-метода)
+```java
+//Пример Аспекта
+@Component
+@Aspect                
+public class Aspect {
+    //перед вызовам метода public void execCode() должен быть вызван advice-метод before() аспекта
+    //"execution(public void execCode())" - это pointcut
+    @Before("execution(public void execCode())")                     
+    public void before() {  
+        //код сквозной функциональности
+    }
+}
+```

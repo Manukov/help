@@ -2,7 +2,9 @@
 
 * [Application Context](#application-context)
 * [Bean](#bean)
+* [BeanFactory](#beanfactory-class)
 * [CDL](#contextualized-dependency-lookup)
+* [ClassPathXmlApplicationContext](#classpathxmlapplicationcontext-class)
 * [Contextualized Dependency Lookup](#contextualized-dependency-lookup)
 * [Dependency Injection](#dependency-injection)
 * [Dependency Lookup](#dependency-lookup)
@@ -48,12 +50,36 @@
 
 
 ### Application Context
-Application Context (Контекст приложения) - 
+Application Context (Контекст приложения) - ... Для работы с контейнером Spring достаточно зависимости [spring-context](#spring-context-dependency), которая транзитивно подтянет все остальные.
+
+### ApplicationContext
+ApplicationContext (org.springframework.context) - это [интерфейс](java/Interface.md), который описывает  
 
 ### Bean
-Bean - объект создаваемый и управляемый [контейнером Spring](#application-context).
+Bean - объект создаваемый и управляемым [контейнером Spring](#application-context).
 * id - уникальный идентификатор бина;
 * class - путь к классу (полное имя класса), объект которого создается;
+
+
+### BeanFactory-class
+BeanFactory (org.springframework.beans.factory) - это интерфейс 
+
+### ClassPathXmlApplicationContext-class
+ClassPathXmlApplicationContext (org.springframework.context.support) 
+
+<details> <summary>Конструкторы</summary>
+
+``` java
+ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  //applicationContext.xml" - xml-консигурация бинов
+//... вызов бинов из контекста
+context.close();               //закрываем контекст
+```
+</details>
+
+<details> <summary>Методы</summary>
+
+* void close(); - закрываем контекст. Контекст приложения должен быть закрыт всегда
+</details>
 
 
 
@@ -88,10 +114,10 @@ IoC (Инверсия управления) - ....  Понятие IoC може�
 ### spring-aop-dependency
 
 ### spring-beans-dependency
-spring-beans - это зависимость которая включает фнукциональность создания новых объектов или [бинов](#bean). Эта зависимость включает транзитивные зависимости: [spring-core](#spring-core-dependency), [spring-jcl](#spring-jcl-dependency). 
+- это зависимость, которая включает функциональность создания новых объектов или [бинов](#bean). Эта зависимость включает транзитивные зависимости: [spring-core](#spring-core-dependency), [spring-jcl](#spring-jcl-dependency). 
 
 ### spring-context-dependency
-spring-context - ..... Включает транзитивные зависимости:
+- это зависимость, в которой находятся различные имплементации [контейнеров Spring](#application-context). Эта зависимость включает транзитивные зависимости:
 * [spring-aop](#spring-aop-dependency)
 * [spring-beans](#spring-beans-dependency)
 * [spring-core](#spring-core-dependency)
@@ -107,7 +133,7 @@ spring-core - ... включает транзитивную зависимост
 ### spring-jcl-dependency
 
 ### @ComponentScan-annotation
-@ComponentScan (org.springframework.context.annotation) - аннотация которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска компонентов/бинов
+@ComponentScan (org.springframework.context.annotation) - это аннотация, которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска компонентов/бинов
 ``` java
 class 
 ```

@@ -1,5 +1,6 @@
 ## Content
 
+* [aspectjweaver](#aspectjweaver)
 * [Cross-Cutting Concern](/index.md#cross-cutting-concern)
 * [org.aspect](#orgaspectj)
 * [Сквозная функциональность / Cross-Cutting Concern](/index.md#cross-cutting-concern)
@@ -20,7 +21,7 @@ AspectJ - это [аспектно-ориентированный](/index/AOP.md
 
 
 ### Advice
-Advice - это метод в аспекте. В зависимости от типа [advice](/index/AOP.md#advice) этот метод может быть аннотирован:
+Advice - это метод в аспект-классе и который определяет что должно произойти. В зависимости от типа [advice](/index/AOP.md#advice) этот метод может быть аннотирован:
 * [@Before](#before-annotation)
 
  [content](#content) [advice](/index/AOP.md#advice)
@@ -59,33 +60,38 @@ aspectjrt (AspectJ Runtime) -
 ### org.aspectj
 org.aspectj - это groupId зависимостей AspectJ. Библиотеки AspectJ
 * [aspectjrt](#aspectjrt) 
-* [aspectjweaver](#aspectjweaver)
+* [aspectjweaver](#aspectjweaver):
+  * [@Aspect](#aspect-annotation)
+  * [@Before](#before-annotation)
 
 
 ### @Aspect-annotation
 @Aspect (org.aspectj.lang.annotation) - аннотация применяется к классу который является [Аспектом](/index/AOP.md#aspect).
 ```java
-//Пример Аспекта
+/**Т.к. класс аннотирован @Aspect, то для него будет создан AOP-прокси*/
 @Component
-@Aspect     //Указываем что этот класс является аспектом
+@Aspect     //Указываем что этот класс является аспектом 
 public class Aspect {
     //advice A ...
     //advice B ...
 }
 ```
+Зависимость: [aspectjweaver](#aspectjweaver)
 
 ### @Before-annotation
-@Before (org.aspectj.lang.annotation) - это аннотация которой аннотируется advice-метод типа Before (должен отработать до вызова advice-метода)
+@Before (org.aspectj.lang.annotation) - это аннотация которой аннотируется advice-метод типа Before (должен отработать до вызова метода с бизнес-логикой)
 ```java
-//Пример Аспекта
+/** advice-метод beforeAdvice() - типа Before должен вызываться перед вызовом метод указанного в pointcut
+ * "execution(public void execCode())" - это pointcut 
+ * Поскольку в pointcut не указан класс, то этот шаблон подойдет для метода в любом классе, который совпадет по сигнатуре*/
 @Component
 @Aspect                
 public class Aspect {
-    //перед вызовам метода public void execCode() должен быть вызван advice-метод before() аспекта
-    //"execution(public void execCode())" - это pointcut
-    @Before("execution(public void execCode())")                     
-    public void before() {  
+    //перед вызовом метода public void execCode() выполнить метод beforeAdvice()
+    @Before("execution(public void execCode())")   //Advice типа Before                  
+    public void beforeAdvice() {  
         //код сквозной функциональности
     }
 }
 ```
+Зависимость: [aspectjweaver](#aspectjweaver)

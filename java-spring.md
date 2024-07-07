@@ -1,17 +1,21 @@
 ## Content
 
+* [Annotation-based Configuration](#annotation-based-configuration)
 * [Application Context](#application-context)
 * [Bean](#bean)
 * [BeanFactory](#beanfactory-class)
 * [CDL](#contextualized-dependency-lookup)
 * [ClassPathXmlApplicationContext](#classpathxmlapplicationcontext-class)
+* [Configuration](#configuration)
 * [Contextualized Dependency Lookup](#contextualized-dependency-lookup)
 * [Dependency Injection](#dependency-injection)
 * [Dependency Lookup](#dependency-lookup)
 * [Dependency Pull](#dependency-pull)
 * [IoC-контейнер](#application-context)
+* [Java-based Configuration](#java-based-configuration)
 * [spring-context](#spring-context-dependency)
 * [spring-jcl](#spring-jcl-dependency)
+* [XML-based Configuration](#xml-based-configuration)
 * [Контекст приложения / Application Context](#application-context)
 
 * [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
@@ -49,6 +53,8 @@
 * spring-core
 
 
+### Annotation-based Configuration
+
 ### Application Context
 Application Context (Контекст приложения) - ... Для работы с контейнером Spring достаточно зависимости [spring-context](#spring-context-dependency), которая транзитивно подтянет все остальные.
 
@@ -65,8 +71,7 @@ Bean - объект создаваемый и управляемым [конте
 BeanFactory (org.springframework.beans.factory) - это интерфейс 
 
 ### ClassPathXmlApplicationContext-class
-ClassPathXmlApplicationContext (org.springframework.context.support) 
-
+ClassPathXmlApplicationContext (org.springframework.context.support)
 <details> <summary>Конструкторы</summary>
 
 ``` java
@@ -81,7 +86,10 @@ context.close();               //закрываем контекст
 * void close(); - закрываем контекст. Контекст приложения должен быть закрыт всегда
 </details>
 
-
+### Configuration
+* [XML-based Configuration](#xml-based-configuration)
+* [Java-based Configuration](#java-based-configuration)
+* [Annotation-based Configuration](#annotation-based-configuration)
 
 ### Contextualized Dependency Lookup
 Contextualized Dependency Lookup (Контекстный поиск зависимостей) - 
@@ -111,6 +119,8 @@ IoC (Инверсия управления) - ....  Понятие IoC може�
 * [Dependency Injection](#dependency-injection)
 * [Dependency Lookup](#dependency-lookup)
 
+### Java-based Configuration
+
 ### spring-aop-dependency
 
 ### spring-beans-dependency
@@ -131,6 +141,9 @@ spring-core - ... включает транзитивную зависимост
 ### spring-expression-dependency
 
 ### spring-jcl-dependency
+
+
+### XML-based Configuration
 
 ### @ComponentScan-annotation
 @ComponentScan (org.springframework.context.annotation) - это аннотация, которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска компонентов/бинов

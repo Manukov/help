@@ -3,13 +3,20 @@
 * [Commands](#commands)
 * [Databasechangelock](#databasechangelock)
 * [Databasechangelog](#databasechangelog)
+* [Master File](#root-changelog)
 * [Migration](#migration)
-* [Комманды / Commands](#commands)
+* [Nested Changelog](#nested-changelog)
+* [Root Changelog](#root-changelog)
+* [Tag](#tag)
+* [Команды / Commands](#commands)
+* [Локальный мастер-файл / Nested Changelog](#nested-changelog)
 * [Миграция / Migration](#migration)
 
 ### Liquibase
 
 ### ChangeLog
+* [Nested Changelog](#nested-changelog)
+* [Root Changelog](#root-changelog)
 
 ### ChangeSet
 
@@ -75,15 +82,16 @@ liquibase generateChangeLog --changeLogFile=changelog.h2.sql --dyffTypes=tables,
                                                                                                         # в файле будут changeSet-ы для создания таблиц c полями и changeSet-ы для создания индексов
 ```
 
-### Master File
-Master File - это changelog в который подключаются другие changelog 
-
-
 ### Migration
 Migration (Миграция) - переезд с одной версии на другую. Мод миграцией подразумевается любое изменение структуры. К термину "миграция" относятся 3 термина:
 * changeLogFile
 * changeSet
 * changetypes
+
+### Nested Changelog
+Nested Changelog (Вложенный changelog) - .... подключается к [Root Changelog](#root-changelog) двумя способами:
+* ```include``` - после которой указывается вложенный changelog и путь к нему. Когда liquibase обрабатывает master file то вложенные changelog  он обрабатывает в порядке добавления
+* ```includeAll``` - после которой указывается директория в которой находяться вложенные changelog
 
 ### Raw SQL changeset
 
@@ -98,6 +106,9 @@ rollback - это команда, которая используется для
 liquibase rollbackCount 1 --changeLogFile=changelog.xml             # из changelog.xml считывает все changeset-ы и отменяет 1 последний
 ```
 
+### Root Changelog
+Root Changelog или Master File - это changelog в который подключаются другие changelog [вложенные changelog](#nested-changelog). Master File может быть написан на XML, JSON или YAML, но не может быть написан на SQL.
+
 ### snapshot-command
 snapshot - команда которая выводит информацию о ткущем состоянии базы данных. Liquibase выведет список всех структур которые он видит в базе данных, включая таблицы [Databasechangelog](#databasechangelog) и [Databasechangelock](#databasechangelock)
 ``` 
@@ -105,6 +116,26 @@ liquibase snapshot                                                  # получ
 liquibase snapshot --outputfile=file.txt                            # получаем текущее состояние базы и записываем полученный отчет в файл "file.txt"
 liquibase snapshot --outputfile=file.json --snapshotFormat=JSON     # получаем текущее состояние базы и записываем полученный отчет в файл "file.json" и форматируем как JSON
 liquibase snapshot --outputfile=file.yaml --snapshotFormat=YAML     # получаем текущее состояние базы и записываем полученный отчет в файл "file.yaml" и форматируем как YAML
+```
+
+### Tag
+Tag (тэг) - 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>	
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd" >
+
+    <include file="/release-1.0.0/release-1.0.0-root.xml"/>
+    <!-- После инструкции include отдельным changeSet устанавливает тэг "tag-release-1.0.0-end" для всех changeset-ов подключаемых файлом release-1.0.0-root.xml
+    Это дает возможность откатить командой rolback все changeSet с таким тэгом-->
+    <changeSet id="tag-release-1.0.0-end" author="_author">
+        <tagDatabase taf="tag-release-1.0.0-end"/>
+    </changeSet>
+</databaseChangeLog>
+
 ```
 
 ### update-command

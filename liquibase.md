@@ -19,6 +19,9 @@
 ChangeTypes - это изменения описанные на JSON, XML, YAML. Преимущество ChangeTypes в том, что они одинаково раскатываются на все базы данных
 
 ### Commands
+* [diff](#diff-command)
+* [diff-changelog](#diff-changelog-command)
+* [generateChangeLog](#generatechangelog-command)
 * [rollback](#rollback-command);
 * [snapshot](#snapshot-command);
 * [update](#update-command);
@@ -27,6 +30,16 @@ ChangeTypes - это изменения описанные на JSON, XML, YAML.
 Databasechangelock - это таблица 
 
 ### Databasechangelog
+
+### diff-command
+diff - команда выводит разницу между структурами двух баз данных. Команда делает [snapshot](#snapshot-command) одной базы данных, [snapshot](#snapshot-command) второй базы данных, получает 2 списка структур и сравнивает эти структуры между собой (что есть
+в первой но нет во второй, и что есть во второй но нет в первой).
+
+### diff-changelog-command
+diff-changelog - то же самое что и [diff](#diff-command), но дополнительно создается файл changelog. И если этот файл с набором changeset применить на первой базе, то получим структуру идентичную второй
+
+### generateChangeLog-command
+generateChangeLog - 
 
 ### Migration
 Migration (Миграция) - переезд с одной версии на другую. Мод миграцией подразумевается любое изменение структуры. К термину "миграция" относятся 3 термина:
@@ -45,7 +58,7 @@ rollback - это команда, которая используется для
 [Raw SQL changeset](#raw-sql-changeset) должны содержать rollback в явном виде, чтобы изменения можно было откатить. При использовании [ChangeTypes](#changetypes) многие rollback поддерживаются из коробки, но лучше так же задавать их в явном виде
 
 ### snapshot-command
-snapshot - 
+snapshot - команда которая выводит информацию о ткущем состоянии базы данных. Liquibase выведет список всех структур которые он видит в базе данных
 
 ### update-command
 update - команда применяет changeset описанные в файле changelog. Liquibase применяет changeset в том порядке, в котором они описаны в файле changelog. Для

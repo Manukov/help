@@ -3,6 +3,7 @@
 * [Commands](#commands)
 * [Databasechangelock](#databasechangelock)
 * [Databasechangelog](#databasechangelog)
+* [Label](#label)
 * [Master File](#root-changelog)
 * [Migration](#migration)
 * [Nested Changelog](#nested-changelog)
@@ -15,14 +16,18 @@
 ### Liquibase
 
 ### ChangeLog
+ChangeLog - это файл со списком миграций базы данных
 * [Nested Changelog](#nested-changelog)
 * [Root Changelog](#root-changelog)
 
 ### ChangeSet
-
 Виды:
 * [Raw SQL changeset](#raw-sql-changeset)
 * [ChangeTypes](#changetypes)
+
+Атрибуты: 
+* [Label](#label)
+* Contexts
 
 ### ChangeTypes
 ChangeTypes - это изменения описанные на JSON, XML, YAML. Преимущество ChangeTypes в том, что они одинаково раскатываются на все базы данных
@@ -52,7 +57,9 @@ liquibse diff --outputFile=diff.txt diffTypes=tables,columns    # сравнен
 
 
 ### diff-changelog-command
-diff-changelog - то же самое что и [diff](#diff-command), но дополнительно создается файл changelog. И если этот файл с набором changeset применить на первой базе, то получим структуру идентичную второй
+diff-changelog - 
+- это команда, которая создает changelog-файл с изменениями для создания текущего состояния базы данных. 
+- то же самое что и [diff](#diff-command), но дополнительно создается файл changelog. И если этот файл с набором changeset применить на первой базе, то получим структуру идентичную второй
 ``` 
 # комманда выполняется как через "diff-changelog" так и "diffСhangelog"  
 
@@ -80,6 +87,31 @@ liquibase generateChangeLog --changeLogFile=changelog.h2.sql --dyffTypes=tables,
  
 liquibase generateChangeLog --changeLogFile=changelog.h2.sql --dyffTypes=tables,indexes,columns        # получаем файл changelog.h2.sql который будет содержать текущее состояния базы данных
                                                                                                         # в файле будут changeSet-ы для создания таблиц c полями и changeSet-ы для создания индексов
+```
+
+### Label Expression
+Label Expression - это логические выражения, которые передаются параметром в [liquibase-команды](#commands) для того, чтобы отфильтровать changeset-ы по labels. В момент выполнения Liquibase проверяет,
+подходят ли label объявленные в changeset под Label Expressions. Changesets в которых вообще нет label будут выполняться для любого Label Expression
+
+Синтаксис:
+* AND - оператор логического И;
+* OR или "," - оператор логического ИЛИ;
+* ! - оператор отрицания;
+* () - оператор, который используется для группировки;
+
+```
+# Если changeset помечен меткой JIRA-1234 и JIRA-4321 или release1.0.0 и метка не содержит JIRA-235
+--liquibase update --labels="((JIRA-1234 AND JIRA-4321) OR release1.0.0) and !JIRA-235"
+```
+
+### Label
+Label (метка) - это строка или список строк, которыми мы можем помечать changeset-ы. С их помощью мы можем группировать changesets и контролировать, какие из них будут выполняться. Когда мы запускаем команду Liquibase мы передаем в атрибутах выражение (Label Expression). Это выражение будет использоваться как фильтр, чтобы определить, какие changesets нужно выполнить. Все labels регистронезависимы.
+```
+--liquibase firmatted sql
+-- changeset manukov:001 labels:JIRA-1234, release1.1
+CREATE TABLE CARDS (
+    ...
+)
 ```
 
 ### Migration
@@ -126,7 +158,7 @@ Tag (тэг) -
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd" >
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="/release-1.0.0/release-1.0.0-root.xml"/>
     <!-- После инструкции include отдельным changeSet устанавливает тэг "tag-release-1.0.0-end" для всех changeset-ов подключаемых файлом release-1.0.0-root.xml

@@ -1,9 +1,10 @@
 ## Content
 
 * [Commands](#commands)
+* [Contexts](#contexts)
 * [Databasechangelock](#databasechangelock)
 * [Databasechangelog](#databasechangelog)
-* [Label](#label)
+* [Label](#labels)
 * [Master File](#root-changelog)
 * [Migration](#migration)
 * [Nested Changelog](#nested-changelog)
@@ -26,8 +27,8 @@ ChangeLog - это файл со списком миграций базы дан
 * [ChangeTypes](#changetypes)
 
 Атрибуты: 
-* [Label](#label)
-* Contexts
+* [Labels](#labels)
+* [Contexts](#contexts)
 
 ### ChangeTypes
 ChangeTypes - это изменения описанные на JSON, XML, YAML. Преимущество ChangeTypes в том, что они одинаково раскатываются на все базы данных
@@ -39,6 +40,29 @@ ChangeTypes - это изменения описанные на JSON, XML, YAML.
 * [rollback](#rollback-command);
 * [snapshot](#snapshot-command);
 * [update](#update-command);
+
+
+### Contexts
+Contexts - это атрибут [changeset](#changeset), который представлет собой строку или список строк и которыми мы можем помечать changeset-ы. 
+Контексты добавляются к include и includeAll и на этапе внедрения changelog-файлов в [master file](#root-changelog) позволяют фильтровать добавление changeset-ов. Если сhangeset не имеет атрибута contexts то include без контекста будут выполняться для всех контекстов.
+
+Синтаксис (используется в тэге Include и includeAll):
+* AND - оператор логического И;
+* OR или "," - оператор логического ИЛИ;
+* ! - оператор отрицания;
+* () - оператор, который используется для группировки;
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="/release-1.0.0/release-1.0.0-root.xml" context="(DEV OR IFT) AND !PROD"/>
+    <include file="/release-2.0.0/release-2.0.0-root.xml" context="DEV"/>
+</databaseChangeLog>
+```
 
 ### Databasechangelock
 Databasechangelock - это таблица 
@@ -104,8 +128,8 @@ Label Expression - это логические выражения, которы�
 --liquibase update --labels="((JIRA-1234 AND JIRA-4321) OR release1.0.0) and !JIRA-235"
 ```
 
-### Label
-Label (метка) - это строка или список строк, которыми мы можем помечать changeset-ы. С их помощью мы можем группировать changesets и контролировать, какие из них будут выполняться. Когда мы запускаем команду Liquibase мы передаем в атрибутах выражение (Label Expression). Это выражение будет использоваться как фильтр, чтобы определить, какие changesets нужно выполнить. Все labels регистронезависимы.
+### Labels
+Label (метка) - это атрибут [changeset](#changeset), который представлет собой строку или список строк, которыми мы можем помечать changeset-ы. С их помощью мы можем группировать changesets и контролировать, какие из них будут выполняться. Когда мы запускаем команду Liquibase мы передаем в атрибутах выражение (Label Expression). Это выражение будет использоваться как фильтр, чтобы определить, какие changesets нужно выполнить. Все labels регистронезависимы.
 ```
 --liquibase firmatted sql
 -- changeset manukov:001 labels:JIRA-1234, release1.1

@@ -57,7 +57,7 @@ Contexts синтаксически схожи с [Labels](#labels), но в о�
 * ! - оператор отрицания;
 * () - оператор, который используется для группировки;
 
-```xml
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -181,7 +181,7 @@ Preconditions (предусловия) - это дополнительные т�
 Виды:
 * [sqlCheck precondition](#sqlcheck-precondition)
 
-```xml 
+``` 
 <!-- Precondition который проверяет, что измнеения накатываются на СУБД Oracle -->
 <preConditions>
     <dbms type="oracle"/>
@@ -250,7 +250,7 @@ liquibase status --labels="JIRA-3231" --verbose         # использован
 ### Tag
 Tag (тэг) - 
 
-```xml
+```
 <?xml version="1.0" encoding="UTF-8"?>	
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"

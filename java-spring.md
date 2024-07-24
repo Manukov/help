@@ -1,5 +1,6 @@
 ## Content
 
+* [Annotation](#annotation)
 * [Annotation-based Configuration](#annotation-based-configuration)
 * [Application Context](#application-context)
 * [Autowiring](#autowiring)
@@ -28,7 +29,7 @@
 * [Неоднозначность бинов / Bean Ambiguity](#bean-ambiguity)
 * [Сканирование компонентов / Component Scan](#component-scan)
 
-* [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
+
 
 
 ### Spring
@@ -62,6 +63,15 @@
 Зависимости:
 * spring-core
 
+
+### Annotation
+* [@Autowired](#autowired-annotation)
+* [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
+* [@Bean](#bean-annotation)
+* [@Component](#component-annotation)
+* [@ComponentScan](#componentscan-annotation)
+* [@Configuration](#configuration-annotation)
+* [@Qualifier](#qualifier-annotation)
 
 ### Annotation-based Configuration
 Annotation-based Configuration - описание бинов и их зависимостей производиться при помощи аннотаций [@Component](#component-annotation), [@Bean](#bean-annotation) и незначительная часть настраивается в xml-файле. 
@@ -213,10 +223,6 @@ public class A {
 [content](#content) [index](index.md#dependency-injection)
 
 
-
-
-
-
 ### Dependency Lookup
 Dependency Lookup (Поиск зависимостей) - форма [IoC](#ioc) ... может иметь в свою очередь 2 формы:
 * [Dependency Pull](#dependency-pull)
@@ -295,6 +301,11 @@ XML-based Configuration (XML-конфигурация) - описание бин
 Преимущества:
 * позволяет настраивать бины без перекомпиляции приложения;
 
+
+
+
+
+
 ### @Autowired-annotation
 @Autowired - делигирует фреймворку Spring поиск бина для зависимости и автоматическое внедрение этой зависимости. Аннотация подбирает подходящие бины по типу (класс или интерфейс)
 1. Spring сканирует все классы с аннотацией @Component и создает баны для этих классов
@@ -333,7 +344,7 @@ class
 * String value - id бина который нужно внедрить
 
 ```java
-/** При использовании аннотации @Qualifier с конструктором, необходимо указывать аннотацию перед аргументами конструктора */
+//При использовании аннотации @Qualifier с конструктором, необходимо указывать аннотацию перед аргументами конструктора
 @Autowired
 publuc MusicPlayer(@Qualifier("rockMusic") Music music1, @Qualifier("classicalMusic") Music music2) {
     this.music1=music1;

@@ -9,6 +9,7 @@
 * [Master File](#root-changelog)
 * [Migration](#migration)
 * [Nested Changelog](#nested-changelog)
+* [Preconditions](#preconditions)
 * [Root Changelog](#root-changelog)
 * [Tag](#tag)
 * [Команды / Commands](#commands)
@@ -32,6 +33,7 @@ ChangeLog - это файл со списком миграций базы дан
 * [Labels](#labels)
 * [Contexts](#contexts)
 
+
 ### ChangeTypes
 ChangeTypes - это изменения описанные на JSON, XML, YAML. Преимущество ChangeTypes в том, что они одинаково раскатываются на все базы данных
 
@@ -41,6 +43,7 @@ ChangeTypes - это изменения описанные на JSON, XML, YAML.
 * [generateChangeLog](#generatechangelog-command)
 * [rollback](#rollback-command);
 * [snapshot](#snapshot-command);
+* [status](#status-command)
 * [update](#update-command);
 
 
@@ -134,7 +137,7 @@ Label (метка) - это атрибут [changeset](#changeset), предст
 Labels синтаксически схожи с [Contexts](#contexts), но в отличие от contexts метки используются, чтобы установить сложную логику на этапе выполнения скриптов
 ```
 --liquibase firmatted sql
--- changeset manukov:001 labels:JIRA-1234, release1.1
+-- changeset manukov:001 labels:JIRA-1234, release1.1           # устанавливаем label
 CREATE TABLE CARDS (
     ...
 )
@@ -151,7 +154,62 @@ Nested Changelog (Вложенный changelog) - .... подключается 
 * ```include``` - после которой указывается вложенный changelog и путь к нему. Когда liquibase обрабатывает master file то вложенные changelog  он обрабатывает в порядке добавления
 * ```includeAll``` - после которой указывается директория в которой находяться вложенные changelog
 
+
+### Preconditions
+Preconditions (предусловия) - это дополнительные тэги, которые позволяют нам контролировать выполнение миграций. Используя Preconditions мы можем:
+* пропускать применение каких-либо changeset
+* останавливать выполнение и выбрасывать ошибки и предупреждения
+* предварительно проверять условия, до применения changeset
+
+
+Атрибуты:
+* onFail - в этот атрибут устанавливается действие выполняемое в случае если предусловие не выполняется. Для определения действия определены 4 константы:
+ * CONTINUE
+ * MARK_RUN
+ * HALT
+ * WARN
+* onFailMessage - в этот атрибут устанавливается сообщение которое будет выброшено при onFail
+* onError
+* onErrorMessage - в этот атрибут устанавливается сообщение которое будет выброшено при onError
+* onSqlOutput 
+
+
+Прекондишн могут писться :
+- на уровне changelog-файла - для проверок которые будут относиться ко всем changeset добавляемым через Include и includeAll
+- на уровне changeset
+
+Виды:
+* [sqlCheck precondition](#sqlcheck-precondition)
+
+```xml 
+<!-- Precondition который проверяет, что измнеения накатываются на СУБД Oracle -->
+<preConditions>
+    <dbms type="oracle"/>
+<preConditions>
+
+    <!-- Precondition который проверяет наличие поля name в таблице CardType -->
+    <preConditions>
+        <columnExists tableName="CardType" colunmName="name"/>
+    <preConditions>
+
+```
+
 ### Raw SQL changeset
+Raw SQL changeset - это [changeset](#changeset) на SQL.Такая возможность появилась в версии 2.0. Для определения метаданных в Raw SQL changeset используются комментарии:
+1. ``` --liquibase formatted sql``` - это комментарий с которого должен начинаться каждый Raw SQL changeset
+2. ```--changeset author:id attribute1:value1 attribute2:value2 [...]``` - это комментарий, который содержит id, author и пр. атрибуты. 
+   * stripComments
+   * splitStatements
+   * endDelimiter
+   * runAlways
+   * runOnChange
+   * context
+   * runInTransaction
+   * failOnError
+   * dbms
+3. ```--precondition-sql-check expectedResult:0 SELECT COUNT(*) FROM my_table``` - это [sqlCheck precondition](#sqlcheck-precondition)  
+
+
 
 ### rollback-command
 rollback - это команда, которая используется для отката базы данных до какого-то состояния (состояние фиксируется в таблице [Databasechangelog](#databasechangelog)
@@ -175,6 +233,19 @@ liquibase snapshot --outputfile=file.txt                            # получ
 liquibase snapshot --outputfile=file.json --snapshotFormat=JSON     # получаем текущее состояние базы и записываем полученный отчет в файл "file.json" и форматируем как JSON
 liquibase snapshot --outputfile=file.yaml --snapshotFormat=YAML     # получаем текущее состояние базы и записываем полученный отчет в файл "file.yaml" и форматируем как YAML
 ```
+
+### sqlCheck Precondition
+.... могут использоваться в [Raw SQL changeset](#raw-sql-changeset)
+
+
+
+### status-command
+``` 
+liquibase status    
+liquibase status --verbose
+liquibase status --labels="JIRA-3231" --verbose         # использование status с labels который фильтрует по задаче JIRA-3231                                               
+```
+
 
 ### Tag
 Tag (тэг) - 

@@ -25,6 +25,7 @@
 * [spring-context](#spring-context-dependency)
 * [spring-jcl](#spring-jcl-dependency)
 * [XML-based Configuration](#xml-based-configuration)
+* [Аннотации / Annotation](#annotation)
 * [Контекст приложения / Application Context](#application-context)
 * [Неоднозначность бинов / Bean Ambiguity](#bean-ambiguity)
 * [Сканирование компонентов / Component Scan](#component-scan)
@@ -61,6 +62,9 @@
 * Spring Security
 
 Зависимости:
+* javax.annotation-api - зависимость для использования аннотаций [@PostConstruct](#postconstruct-annotation) и [@PreDestroy](#predestroy-annotation)
+* spring-beans
+* spring-context
 * spring-core
 
 
@@ -71,7 +75,13 @@
 * [@Component](#component-annotation)
 * [@ComponentScan](#componentscan-annotation)
 * [@Configuration](#configuration-annotation)
+* [@PostConstruct](#postconstruct-annotation)
+* [@PreDestroy](#predestroy-annotation)
 * [@Qualifier](#qualifier-annotation)
+* [@Scope](#scope-annotation)
+* [@Value](#value-annotation)
+
+[content](#content) [Annotation](java.md#annotation)
 
 ### Annotation-based Configuration
 Annotation-based Configuration - описание бинов и их зависимостей производиться при помощи аннотаций [@Component](#component-annotation), [@Bean](#bean-annotation) и незначительная часть настраивается в xml-файле. 
@@ -141,16 +151,13 @@ context.close();               //закрываем контекст
 
 
 ### Component Scan
-Component Scan (сканирование компонентов) - поиск классов для которых будут созданы бины. 
-
+Component Scan (сканирование компонентов) - поиск классов для которых будут созданы бины.
 ```xml
 <beas>
     <!-- сканирует все классы в пакете by.manukov. Для всех классов в этом пакете аннотированных @Component будут созданы бины -->
     <context:component-scan base-package="by.manukov"/>
 </beas>
 ```
-
-
 
 ### Configuration
 * [XML-based Configuration](#xml-based-configuration)
@@ -159,9 +166,6 @@ Component Scan (сканирование компонентов) - поиск к
 
 ### Contextualized Dependency Lookup
 Contextualized Dependency Lookup (Контекстный поиск зависимостей) - 
-
-
-
 
 ### Dependency Injection
 Dependency Injection (Внедрение зависимостей) - форма [IoC](#ioc) ... может иметь в свою очередь 2 формы:
@@ -339,6 +343,36 @@ class
 @EnableAspectJAutoProxy (org.springframework.context.annotation) - позволяет использовать Spring AOP Proxy. Обработчик аннотации создает прокси для класса аннотированного данной аннотацией.
 Зависимость: [spring-context](#spring-context-dependency)
 
+
+### @PreDestroy-annotation
+@PreDestroy (javax.annotation) - аннотация которой аннотируется [destroy-method](#destroy-method)
+<details> <summary>Example</summary>
+
+```java
+@Component
+class CustomBean {
+    @PreDestroy
+    public void destroy(){          
+    }
+}
+```
+</details>
+
+### @PostConstruct-annotation
+@PostConstruct (javax.annotation) - аннотация которой аннотируется [init-method](#init-method)
+<details> <summary>Example</summary>
+
+```java
+@Component
+class CustomBean {
+    @PostConstruct
+    public void init(){
+    }
+}
+```
+</details>
+
+
 ### @Qualifier-annotation
 @Qualifier (Уточнитель) - аннотация используется совместно с аннотацией [@Autowired](#autowired-annotation) для решения проблемы [неоднозначности бинов](#bean-ambiguity). Аттрибуты:
 * String value - id бина который нужно внедрить
@@ -356,5 +390,48 @@ publuc MusicPlayer(@Qualifier("rockMusic") Music music1, @Qualifier("classicalMu
 public void setMusic(Music music) {
     this.music=music;
 }
-
 ```
+
+### @Scope-annotation
+@Scope - аннотация позволяющая устанавливать область видимости бина.
+<details> <summary>Example</summary>
+
+```java
+// Аналог при xml-конфигурации
+// <bean id="custom-Bean" class="ru.sber.CustomBean" scope="prototype">
+@Component("custom-Bean")
+@Scope("prototype")
+class CustomBean {
+}
+```
+</details>
+
+
+
+### @Value-annotation
+@Value - аннотация позволяющая внедрять значения из внешнего properties-файла.
+<details> <summary>Example</summary>
+
+```java
+/*
+ 1. В файле appProp.properties объявлены 2 свойства: 
+    app.value1=12 
+    app.value2=Hello
+ 2. В конфигурационном xml-файле импортируем property-файл
+    <context:property-placeholder location="classpath:appProp.properties">
+ 3. В классе CustomBean внедряем значения из property-файла используя аннотацию @Value  **/
+@Component
+class CustomBean {
+    @Value("${app.value1}")         //значение по ключу app.value1 будет внедрено в поле
+    private Integer intValue;
+    @Value("${app.value2}")         //значение по ключу app.value2 будет внедрено в поле
+    public String stringValue;
+
+}
+```
+</details>
+
+
+
+
+

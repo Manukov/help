@@ -64,8 +64,8 @@
 
 Зависимости:
 * javax.annotation-api - зависимость для использования аннотаций [@PostConstruct](#postconstruct-annotation) и [@PreDestroy](#predestroy-annotation)
-* spring-beans
-* spring-context
+* [spring-beans](#spring-beans-dependency)
+* [spring-context](#spring-context-dependency)
 * spring-core
 
 
@@ -245,7 +245,36 @@ public class A {
     </bean>
 </beas>
 ```
+</details>
+<details> <summary>Example: ручное внедрение зависимостей, без @Autowired </summary>
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans">
+    
+    <bean id="beanA" class="ru.sber.A"/>
+    <bean id="beanB" class="ru.sber.B">
+        <constructor-arg ref="beanA"/>
+    </bean>
+    
+</beans>
+```
+
+```java
+@Configuration
+public class SpringConfig {
+    @Bean
+    public A beanA () {             //<bean id="beanA">
+        return new A();
+    }
+    @Bean
+    public B beanB () {             //<bean id="beanB">
+        return new B(beanA());      //вручную внедряем зависимость через конструктор, вызываем метод который создает бин зависимости
+    }
+}
+```
 </details>
 
 [content](#content) [index](index.md#dependency-injection)
@@ -375,7 +404,6 @@ class AppConfig {
 <?xml version="1.0" encoding="UTF-8"?>
 <beans  xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
         xsi:schemaLocation="http://www.springframework.org/schema/beans">
     
     <!--@Bean  -->
@@ -412,7 +440,7 @@ class AppConfig { }
 </details>
 
 ### @Configuration-annotation
-@Configuration (org.springframework.context.annotation) - аннотация которой аннотируется конфигурационный класс - это 'класс, который содержит в себе настройку Spring. 
+@Configuration (org.springframework.context.annotation) - аннотация которой аннотируется конфигурационный класс - это класс, который содержит в себе настройку Spring. 
 
 <details> <summary>Example: пустой конфигурационный класс</summary>
 Пустой конфигурационный класс равен по функционалу пустому конфигурационному xml-файлу. И для каждого xml-тэга есть соответствующая аннотация.
@@ -426,7 +454,6 @@ class AppConfig { }
 <?xml version="1.0" encoding="UTF-8"?>
 <beans  xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
         xsi:schemaLocation="http://www.springframework.org/schema/beans">
 </beans>
 ```

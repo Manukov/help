@@ -40,7 +40,17 @@ Classpath – это [переменная окружения](index.md#environm
 
 ### Keywords
 * [class](#class-keyword)
+* [double](#double-keyword)
+* [implements](#implements-keyword)
+* [import](#import-keyword)
+* [int](#int-keyword)
 * [interface](#interface-keyword)
+* [long](#long-keyword)
+* [package](#package-keyword)
+* [private](#private-keyword)
+* [protected](#protected-keyword)
+* [public](#public-keyword)
+* [void](#void-keyword)
 
 ### Object
 
@@ -69,8 +79,32 @@ Setter - это специальный метод который использ�
 Resources Root - директория с исходными кодами приложения
 
 
+
+
+
+
 ### class-keyword
 - ключевое слово для объявления [интерфейса](java/Interface.md)
 
+### double-keyword
+
+### implements-keyword
+
+### import-keyword
+
+### int-keyword
+
 ### interface-keyword
 - ключевое слово для объявления [класса](java/Class.md)
+
+### long-keyword
+
+### package-keyword
+
+### private-keyword
+
+### protected-keyword
+
+### public-keyword
+
+### void-keyword

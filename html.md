@@ -39,4 +39,4 @@ URL-encoding - способ кодирования содержимого [фо�
 </form>
 ```
 
-[content](#content) [index](/index.md)
+[content](#content) [index](index.md)

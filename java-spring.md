@@ -77,6 +77,7 @@
 * [@ComponentScan](#componentscan-annotation)
 * [@ComponentScans](#componentscans-annotation)
 * [@Configuration](#configuration-annotation)
+* [@Controller](#controller-annotation)
 * [@PostConstruct](#postconstruct-annotation)
 * [@PreDestroy](#predestroy-annotation)
 * [@Qualifier](#qualifier-annotation)
@@ -346,6 +347,7 @@ Scope (область видимости) - определяет, как Spring 
 * [spring-core](#spring-core-dependency)
 * [spring-expression](#spring-expression-dependency)
 * [spring-jcl](#spring-jcl-dependency)
+* [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
 
 ### spring-core-dependency
 spring-core - ... включает транзитивную зависимость [spring-jcl](#spring-jcl-dependency)
@@ -465,6 +467,8 @@ class AppConfig { }
 </details>
 
 Зависимость: [spring-context](#spring-context-dependency)
+
+### @Controller-annotation
 
 ### @EnableAspectJAutoProxy-annotation
 @EnableAspectJAutoProxy (org.springframework.context.annotation) - позволяет использовать Spring AOP Proxy. Обработчик аннотации создает прокси для класса аннотированного данной аннотацией.

@@ -75,6 +75,7 @@
 * [@Bean](#bean-annotation)
 * [@Component](#component-annotation)
 * [@ComponentScan](#componentscan-annotation)
+* [@ComponentScans](#componentscans-annotation)
 * [@Configuration](#configuration-annotation)
 * [@PostConstruct](#postconstruct-annotation)
 * [@PreDestroy](#predestroy-annotation)
@@ -96,7 +97,7 @@ Annotation-based Configuration (конфигурация при помощи а�
 * Код становится более читабельным
 
 ### AnnotationConfigApplicationContext-class
-AnnotationConfigApplicationContext - реализация [ApplicationContext](#applicationcontext) при [Java-конфигурации](#java-based-configuration)
+AnnotationConfigApplicationContext (org.springframework.context.annotation) - реализация [ApplicationContext](#applicationcontext) при [Java-конфигурации](#java-based-configuration)
 <details> <summary>Конструкторы</summary>
 
 ```java
@@ -380,8 +381,8 @@ XML-based Configuration (XML-конфигурация) - это [конфигу�
 4. Если не находиться ни одного бина - ошибка
 5. Если находиться более одного бина - неоднозначность
 
-@Autowired можно испоьзовать на:
-* полях - внедояет зависимост ьдаже в private-поле если нет конструктора или сетеера. Это реализуется при помощи Reflection API
+@Autowired можно использовать с:
+* полями - внедряет зависимость даже в private-поле если нет конструктора или сетеера. Это реализуется при помощи Reflection API
 * сеттерах 
 * конструкторах
 
@@ -418,7 +419,8 @@ class AppConfig {
 @Component (org.springframework.stereotype) - это аннотация, которая указывает Spring для каких классов создавать бины. В качестве атрибута value аннотация принимает строковое представление id бина, если атрибут value не используется, то в качестве id бина будет использоваться название класса с маленькой буквы. Аннотация применяется только к классу, а не к интефрейсу
 
 ### @ComponentScan-annotation
-@ComponentScan (org.springframework.context.annotation, [spring-context](#spring-context-dependency)) - это аннотация, которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска бинов. Эта аннотация эквивалента тэгу ```context:component-scan```.
+@ComponentScan (org.springframework.context.annotation, [spring-context](#spring-context-dependency)) - это аннотация, которая указывает Spring-контейнеру на то, какие пакеты нужно сканировать для поиска бинов. Эта аннотация эквивалента тэгу ```context:component-scan```. Аттрибуты:
+* value - атрибут принимает строкое представление пути к пакету с компонентами;
 <details> <summary>Example</summary>
 
 ```java
@@ -438,6 +440,8 @@ class AppConfig { }
 </beans>
 ```
 </details>
+
+### @ComponentScans-annotation
 
 ### @Configuration-annotation
 @Configuration (org.springframework.context.annotation) - аннотация которой аннотируется конфигурационный класс - это класс, который содержит в себе настройку Spring. 

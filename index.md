@@ -1,5 +1,9 @@
 ## Content
 
+Консольные команды имеют суффикс "-command"
+Типы имеют имеют суффикс "-class"
+
+
 * [Absolute path](#absolute-path)
 * [AOP](index/AOP.md#aop)
 * [CLI](#cli)
@@ -34,8 +38,10 @@
 * [URL](#url)
 * [URL-encoding](html.md#url-encoding)
 * [Utility](#utility)
+* [Web Server](#web-server)
 * [Аспектно-ориентированное программирование / AOP](index/AOP.md#aop)
 * [Ввод/вывод / Input/Output](#input-output)
+* [Веб-сервер/Web Server](#web-server)
 * [Дескриптор файла / File Descriptor](#file-descriptor)
 * [Инверсия управления / Inversion Of Control](#inversion-of-control)
 * [Интерпретатор командной строки / Shell](#shell)
@@ -217,3 +223,5 @@ Utility (утилита) - вспомогательная программа (и
 Утилиты могут запускаться на исполнение 2 способами:
 * Через [CLI](#cli)
 * Через элементы графического интерфейса
+
+### Web Server

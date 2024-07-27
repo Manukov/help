@@ -2,14 +2,18 @@
 * [Annotation](#annotation)
 * [Controller](#controller)
 * [DispatcherServlet](#dispatcherservlet)
-* [Spring MVC](#spring-web-mvc)
+* [Spring MVC](#spring-mvc)
 
 
-### Spring Web MVC
+### Spring MVC
 Spring Web MVC - это модуль Spring Framework который позволяет разрабатывать web-приложения с использованием архитектуры Model-View-Controller. При работе с Spring MVC реализовываются только:
 * Controller
 * Model
 * View
+
+Зависимости:
+* [spring-web](#spring-web-dependency)
+* [spring-webmvc](#spring-webmvc-dependency)
 
 ### Annotation
 
@@ -30,6 +34,10 @@ Model - это класс аннотированный @Entity. Этот ком�
 * хранит данные
 * взаимодействует с БД для получения данных
 * отдает данные контроллеру
+
+### spring-web-dependency
+
+### spring-webmvc-dependency
 
 ### View
 View (Представление) - это html-страница.

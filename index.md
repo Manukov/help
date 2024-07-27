@@ -6,6 +6,8 @@
 
 * [Absolute path](#absolute-path)
 * [AOP](index/AOP.md#aop)
+* [Buffer](#buffer)
+* [Camel Case](#camel-case)
 * [CLI](#cli)
 * [Code Tangling](#code-tangling)
 * [Code Scattering](#code-scattering)
@@ -62,7 +64,16 @@ Absolute Path (абсолютный путь) - это путь, который 
 
 [content](#content) [Java-SE-IO](java-SE-IO.md#absolute-path)
 
+
+### Artifact
+Artifact (артефакт) - ... что-либо созданное, что передается по этапу разработки.
+* ...
+* [собранный проект](java.md#artifact)
+* ...
+
 ### Buffer
+
+### Camel Case
 
 ### CLI
 CLI (Command Line Interface) - это способ взаимодействия между человеком и компьютером путём отправки компьютеру команд, представляющих собой последовательность символов. Команды интерпретируются с помощью специального интерпретатора, называемого [оболочкой](#shell).

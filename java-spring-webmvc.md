@@ -11,6 +11,8 @@ Spring Web MVC - это модуль Spring Framework который позво�
 * Model
 * View
 
+Поставка: модуль Spring MVC поставляется в библиотеках: [spring-web](#spring-web-dependency), [spring-webmvc](#spring-webmvc-dependency)
+
 Зависимости:
 * [spring-web](#spring-web-dependency)
 * [spring-webmvc](#spring-webmvc-dependency)

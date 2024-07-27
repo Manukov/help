@@ -4,6 +4,7 @@
 * [Annotation](#annotation)
 * [artifact](#artifact)
 * [Class](java/Class.md)
+* [Class](#class-class)
 * [Classpath](#classpath)
 * [Deployment descriptor](#deployment-descriptor)
 * [ear](#ear)
@@ -47,6 +48,18 @@ Artifact (артефакт) - это файл [jar-архив](#jar) или [war
 
 ### Base Class
 Base Class (Базовый класс) -
+
+### Class-class
+Class<T> (java.lang) - объект этого класса содержит информацию о типе (класс, интерфейс) и используется там, где нужно передать информацию о типе. Способы получения объекта типа Class<>:
+* .class - вызов метода .class на типе, используется в случае когда объект этого класса еще не создан. Вызов эквивалентен вызову getClass() на объекте;
+* getClass() - вызов метода getClass() на объекте, используется в случае когда объект этого класса уже создан. Вызов эквивалентен вызову .class на типе;
+
+```java
+public static void main (String[] args) {
+    Class<?> clazz = String.class;                  //сведения о типе для типа (объект не создан)
+    Class<?> clazz = new String().getClass();       //сведения о типе для объекта (объект создан)
+}
+```
 
 ### Classpath
 Classpath – это [переменная окружения](index.md#environment-variable), которая сообщает JVM, где искать пользовательские и системные классы. Это может быть путь к директории, где хранятся скомпилированные классы, или путь к jar-файлам.
@@ -167,7 +180,12 @@ WEB-INF - это директория в корне архива java-прило
 ### web-xml
 Web.xml - это [дескриптор развертывания](#deployment-descriptor) веб-приложения который храниться в директории [WEB-INF](#web-inf).
 
+Для Spring Framework конфигурация из web.xml может быть настроена в java-коде, при использовании абстрактного класса [AbstractAnnotationConfigDispatcherServletInitializer](java-spring-webmvc.md#abstractannotationconfigdispatcherservletinitializer-class) или интерфейса [WebApplicationInitializer](java-spring-webmvc.md#webapplicationinitializer-class)
+
 ### webapp
+
+
+
 
 ### abstract-keyword
 

@@ -16,8 +16,8 @@ Spring Web MVC - это модуль Spring Framework который позво�
 
 
 ### AbstractAnnotationConfigDispatcherServletInitializer-class
-AbstractAnnotationConfigDispatcherServletInitializer - абстрактный класс, который реализует интерфейс [WebApplicationInitializer](#webapplicationinitializer-class) и
-позволяет более удобно использовать java-конфигурацию вместо [web.xml](java.md#web-xml).
+AbstractAnnotationConfigDispatcherServletInitializer - абстрактный класс, который реализует интерфейс [WebApplicationInitializer](#webapplicationinitializer-class) и позволяет более удобно использовать java-конфигурацию вместо [web.xml](java.md#web-xml). 
+Этот класс дополнительно требует подключения зависимости "javax.servlet-api".
 
 ### Annotation
 
@@ -33,10 +33,63 @@ DispatcherServlet - это входная точка в Spring MVC прилож�
 1. Принимает Http-запрос
 2. В зависимости от настроек, для настроенного url отправляет запрос на нужный Controller
 
-DispatcherServlet конфигурируется одним из способов:
-* в [web.xml](java.md#web-xml) 
-* используя [AbstractAnnotationConfigDispatcherServletInitializer](#abstractannotationconfigdispatcherservletinitializer-class) или [WebApplicationInitializer](#webapplicationinitializer-class)
+<details><summary>Example: конфигурация Dispatcher Servlet при xml-конфигурации</summary>
 
+При xml конфигурации используется [web.xml](java.md#web-xml) и файл в котором настраивается шаблонизатор.
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Archetype Created Web Application</display-name>
+  <absolute-ordering/>
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <!-- ссылка на файл с настройками шаблонизатора. -->
+      <param-value>/WEB-INF/engineConfig.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <!-- все запросы на один диспетчер сервлетов -->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+</details>
+
+<details><summary>Example: конфигурация Dispatcher Servlet при java-based конфигурации</summary>
+
+При java-based конфигурации используется один из 2-х вариантов:
+* наследование от [AbstractAnnotationConfigDispatcherServletInitializer](#abstractannotationconfigdispatcherservletinitializer-class);
+* реализация интерфеса [WebApplicationInitializer](#webapplicationinitializer-class).
+```java
+public class DispatcherServletConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+  @Override
+  protected Class<?>[] getRootConfigClasses() {
+    return null;        //этот метод не используется
+  }
+  
+  /** Аналог секции <servlet> в web.xml */
+  @Override
+  protected Class<?>[] getServletConfigClasses() {
+    return new Class[] {TemplateEngineConfig.class};    //<param-value>/WEB-INF/applicationContext.xml</param-value>
+  }
+
+  /** Аналог секции <servlet-mapping> в web.xml */
+  @Override
+  protected String[] getServletMappings() {
+    return new String[] {"/"};          //<url-pattern>/</url-pattern>
+  }
+}
+```
+</details>
 
 ### DispatcherServlet-class
 DispatcherServlet (org.springframework.web.servlet) - реализация [DispatcherServlet](#dispatcherservlet) предоставляемая библиотекой [spring-webmvc](#spring-webmvc-dependency).
@@ -99,5 +152,9 @@ public class WebInitializer implements WebApplicationInitializer {
 ```
 
 
+### @EnableWebMvc-annotation
+@EnableWebMvc (org.springframework.web.servlet.config.annotation) - аннотация подключает обработчики аннотаций из библиотеки [spring-webmvc](#spring-webmvc-dependency). 
+Использование аннотации аналогично тэгу ```mvc:annotation-driven``` из схемы http://www.springframework.org/schema/mvc.
+>
 #### @GetMapping-annotation
 @GetMapping 

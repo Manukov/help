@@ -1,6 +1,18 @@
 ## Content
 
+* [cmd](#cmd)
 * [File Descriptor](#file-descriptor)
+
+
+### cmd
+
+| windows | linux  |
+|---------|--------|
+| cd      | pwd    |
+| dir     | ls     |
+| mkdir   | mkdir  |
+| whoami  | whoami |
+|         |        |
 
 
 ### Environment Variable

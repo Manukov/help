@@ -347,10 +347,40 @@ Scope (область видимости) - определяет, как Spring 
 * [spring-core](#spring-core-dependency)
 * [spring-expression](#spring-expression-dependency)
 * [spring-jcl](#spring-jcl-dependency)
+
+Пакеты:
+* cache
+* context
+* ejb
+* format
+* instrument.classloading
+* jmx
+* jndi
+* remoting
+* scheduling
+* scripting
+* stereotype
+  * [@Component](#component-annotation)
+  * [@Controller](#controller-annotation)
+  * @indexed
+  * @Repository
+  * @Service
+* ui
+* validation
+
+
 * [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
 
 ### spring-core-dependency
 spring-core - ... включает транзитивную зависимость [spring-jcl](#spring-jcl-dependency)
+
+Пакеты:
+* asm
+* cglib
+* core
+* lang
+* objenesis
+* util
 
 ### spring-expression-dependency
 

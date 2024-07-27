@@ -9,6 +9,7 @@
 * [ear](#ear)
 * [Interface](java/Interface.md)
 * [jar](#jar)
+* [javaagent](#javaagent)
 * [Keywords](#keywords)
 * [MANIFEST.FM](#manifest-fm)
 * [META-INF](#meta-inf)
@@ -64,6 +65,8 @@ Deployment descriptor (дескриптор развертывания) - это
 ### ear
 
 ### jar
+
+### javaagent
 
 ### Keywords
 * [abstract](#abstract-keyword)

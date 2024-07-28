@@ -407,8 +407,29 @@ XML-based Configuration (XML-конфигурация) - это [конфигу�
 
 
 ### @AliasFor-annotation
-@AliasFor
+@AliasFor - это [мета-аннотация](java/Annotation.md#meta-annotation) с [ElementType.METHOD](java/Annotation.md#elementtype-class) которая используется для псевдонимов аттрибутов, чтобы была возможность использовать их взаимозаменяемо. 
+```java
+@Retention(RUNTIME)
+@Target(FIELD)
+public @interface MyAnnotation {
+  @AliasFor("name") String value() default "";
+  @AliasFor("value") String name() default "";
+}
 
+public class Bean {
+  @MyAnnotation(value = "str1")     //Compile Ok: value = str1", name = "str1". Явно указываем только value 
+  private String prop_a;
+
+  @MyAnnotation(name = "str2")      //Compile Ok: value = str2", name = "str2". Явно указываем только name  
+  private String prop_b;
+
+  @MyAnnotation(name = "str1", value = "str1") //Compile Ok: value = str1", name = "str1". Явно указываем оба параметра но одинаковым значением  
+  private String prop_c;
+
+  @MyAnnotation(name = "str1", value = "str2") //Compile Error: так как свояйтсва явдляются псевдонимами друг друга, то в них не могут быть разные значекия
+  private String prop_d;
+}
+```
 
 ### @Autowired-annotation
 @Autowired - делигирует фреймворку Spring поиск бина для зависимости и автоматическое внедрение этой зависимости. Аннотация подбирает подходящие бины по типу (класс или интерфейс)

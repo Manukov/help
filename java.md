@@ -3,6 +3,7 @@
 * [Access modifier](#access-modifier)
 * [Annotation](#annotation)
 * [artifact](#artifact)
+* [Bytecode Analyzer](#bytecode-analyzer)
 * [Class](java/Class.md)
 * [Class](#class-class)
 * [Classpath](#classpath)
@@ -30,6 +31,7 @@
 * [WEB-INF](#web-inf)
 * [web.xml](#web-xml)
 * [webapp](#webapp)
+* [Анализатор байткода/Bytecode Analyzer](#bytecode-analyzer)
 * [Дескриптор развертывания / Deployment descriptor](#deployment-descriptor)
 * [Модификатор доступа / Access modifier](#access-modifier)
 * [Ссылка / Reference](#reference)
@@ -49,6 +51,8 @@ Artifact (артефакт) - это файл [jar-архив](#jar) или [war
 
 ### Base Class
 Base Class (Базовый класс) -
+
+### Bytecode Analyzer
 
 ### Class-class
 Class<T> (java.lang) - объект этого класса содержит информацию о типе (класс, интерфейс) и используется там, где нужно передать информацию о типе. Способы получения объекта типа Class<>:

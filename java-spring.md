@@ -70,6 +70,7 @@
 
 
 ### Annotation
+* [@AliasFor](#aliasfor-annotation)
 * [@Autowired](#autowired-annotation)
 * [@EnableAspectJAutoProxy](#enableaspectjautoproxy-annotation)
 * [@Bean](#bean-annotation)
@@ -405,6 +406,10 @@ XML-based Configuration (XML-конфигурация) - это [конфигу�
 
 
 
+### @AliasFor-annotation
+@AliasFor
+
+
 ### @Autowired-annotation
 @Autowired - делигирует фреймворку Spring поиск бина для зависимости и автоматическое внедрение этой зависимости. Аннотация подбирает подходящие бины по типу (класс или интерфейс)
 1. Spring сканирует все классы с аннотацией @Component и создает баны для этих классов
@@ -499,6 +504,8 @@ class AppConfig { }
 Зависимость: [spring-context](#spring-context-dependency)
 
 ### @Controller-annotation
+@Controller - 
+
 
 ### @EnableAspectJAutoProxy-annotation
 @EnableAspectJAutoProxy (org.springframework.context.annotation) - позволяет использовать Spring AOP Proxy. Обработчик аннотации создает прокси для класса аннотированного данной аннотацией.

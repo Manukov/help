@@ -3,7 +3,10 @@
 * [Annotation](#annotation)
 * [Controller](#controller)
 * [DispatcherServlet](#dispatcherservlet)
+* [spring-web](#spring-web-dependency)
+* [spring-webmvc](#spring-webmvc-dependency)
 * [Spring MVC](#spring-mvc)
+* [WebApplicationInitializer](#webapplicationinitializer-class)
 
 
 ### Spring MVC
@@ -20,6 +23,8 @@ AbstractAnnotationConfigDispatcherServletInitializer - абстрактный к
 Этот класс дополнительно требует подключения зависимости "javax.servlet-api".
 
 ### Annotation
+* [@EnableWebMvc](#enablewebmvc-annotation)
+* [@Getmapping](#getmapping-annotation)
 
 ### Controller
 Controller - это класс аннотированный [@Controller](java-spring.md#controller-annotation) который:
@@ -27,6 +32,11 @@ Controller - это класс аннотированный [@Controller](java-s
 * обменивается данными с моделью
 * показывает пользователю правильное представление
 * Переадресовывает пользователя на другие страницы
+
+Описание:
+* методы контроллера могут иметь любое название
+* обычно (но не всегда) каждый метод соотвествет одному url
+
 
 ### DispatcherServlet
 DispatcherServlet - это входная точка в Spring MVC приложение. Spring MVC предоставляет его реализацию (самостоятельно реализовывать не надо). Это компонент, которыйна основании настроек:
@@ -151,10 +161,24 @@ public class WebInitializer implements WebApplicationInitializer {
 }
 ```
 
+#### @DeleteMapping-annotation
 
 ### @EnableWebMvc-annotation
 @EnableWebMvc (org.springframework.web.servlet.config.annotation) - аннотация подключает обработчики аннотаций из библиотеки [spring-webmvc](#spring-webmvc-dependency). 
 Использование аннотации аналогично тэгу ```mvc:annotation-driven``` из схемы http://www.springframework.org/schema/mvc.
 >
 #### @GetMapping-annotation
-@GetMapping 
+@GetMapping - связывает метод контроллера с GET-методом. 
+
+#### @PatchMapping-annotation
+@PatchMapping - связывает метод контроллера с GET-методом
+
+#### @PostMapping-annotation
+
+#### @PutMapping-annotation
+
+#### @RequestMapping-annotation
+@RequestMapping - аннотация, которая связывает метод [контроллера](#controller) с url
+
+Атрибуты:
+* method - устанавливает HTTP-метод

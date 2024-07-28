@@ -19,7 +19,7 @@ AOP () — это [парадигма программирования](../index
 
 Фреймворки реализующие АОП:
 * [Aspect J](/java/java-AspectJ.md)
-* [Spring AOP](../java-spring/java-spring-AOP.md)
+* [Spring AOP](../java-spring-AOP.md)
 
 ### Advice
 Advice (совет) - определяет, что, когда и перед вызовом чего должно происходить. Имплементация Advice - это метод в [aspect-классе](#aspect). 

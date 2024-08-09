@@ -13,6 +13,8 @@
 * [Interface](java/Interface.md)
 * [jar](#jar)
 * [javaagent](#javaagent)
+* [JVM](#jvm)
+* [JVM Options](#jvm-options)
 * [Keywords](#keywords)
 * [MANIFEST.FM](#manifest-fm)
 * [Meta-Annotation](java/Annotation.md#meta-annotation)
@@ -88,6 +90,13 @@ Deployment descriptor (дескриптор развертывания) - это
 ### javaagent
 
 ### JVM
+
+### JVM Options
+JVM Options - это параметры передаваемые в JVM. Существуют 3 типа параметров:
+* стандартные - это опции которые не имеют префикса
+* нестандартные - это опция с префиксом "-X"
+* расширенные - это опция с префиксом "-XX"
+* "-D" - это произвольные аргументы в формате "ключ-значение", где каждый ключ начинается с "-D". Как и все аргументы они должны рахделяться через пробельный символ
 
 ### Keywords
 * [abstract](#abstract-keyword)

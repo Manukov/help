@@ -12,3 +12,26 @@
    * ```-partitions 1``` - одна партиция
    * ```-replication-factor 1``` - один
 5. ююю
+
+
+## Kafka
+
+В состав Kafka (для windows) входят утилиты:
+* 
+
+
+## Content
+
+* [Topic](#topic)
+
+### Topic
+
+Создание топика производиться при помощи утилиты "kafka-topic".
+
+
+При попытке создания топика с таким же именем, получаем исключение TopicExistException: Topic 'name' already exists
+
+
+[content](#content) 
+
+### ZooKeeper
